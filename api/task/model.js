@@ -6,7 +6,8 @@ const { intToBoolean } = require("../project/project-helpers");
 async function getAll() {
   const data = await db("projects as p")
     .leftJoin("tasks as t", "p.project_id", "t.project_id")
-    .select("project_name", "project_description", "t.*");
+    .select("t.*", "project_name", "project_description")
+    .orderBy("t.task_id")
   return mapObjects(data);
 }
 async function getById(id) {
