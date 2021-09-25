@@ -4,7 +4,7 @@ const db = require("../../data/dbConfig")
 
 const validateResourceNameUnique = (req, res, next) => {
     const existing = db("resources").where("resource_name", req.body.resource_name)
-    if (existing) {
+    if (existing === undefined) {
         next({ staus: 404, message: "resource with that name already exists!"})
     }
     else{
