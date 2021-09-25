@@ -1,27 +1,25 @@
 // build your `Project` model here
-const db = require("../../data/dbConfig")
-const helpers = require("./helpers")
+const db = require("../../data/dbConfig");
+const { mapObjects, intToBoolean } = require("./project-helpers");
 
-const {  mapObjects } = helpers
-
-
-
-async function getAll(){
-   const data = await db("projects")
-   const result = mapObjects(data)
-   return result
+async function getAll() {
+  const data = await db("projects");
+  const result = mapObjects(data);
+  return result;
 }
 
-async function getById(id){
-   const data = await db("projects").where("project_id", id)
-   return mapObjects(data)
+async function getById(id) {
+  const data = await db("projects").where("project_id", id).first();
+  return {
+    ...data,
+    project_completed: intToBoolean(data.project_completed),
+  };
 }
 
 function insert(project) {
-   return db("projects")
-     .insert(project)
-     .then(([id]) => getById(id));
- }
+  return db("projects")
+    .insert(project)
+    .then(([id]) => getById(id));
+}
 
-
-module.exports = { getAll, getById, insert }
+module.exports = { getAll, getById, insert };

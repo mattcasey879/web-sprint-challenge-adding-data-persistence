@@ -5,9 +5,18 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex("projects").insert([
-        { project_name: "foo", project_description: "bar" },
-        { project_name: "yee", project_description: "haw" },
-        { project_name: "lets", project_description: "go" },
+        {
+          project_name: "In a galaxy far far away",
+          project_description: "I am your father",
+        },
+        {
+          project_name: "Destroy the One Ring",
+          project_description: "Don't go through Moria",
+        },
+        {
+          project_name: "The boy who lived",
+          project_description: "Survive Hogwarts",
+        },
       ]);
     });
 };
