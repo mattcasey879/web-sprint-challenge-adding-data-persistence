@@ -13,11 +13,13 @@ server.use("/api/projects", ProjectRtr);
 server.use("/api/resources", ResourceRtr);
 server.use("/api/tasks", TaskRtr);
 
+// catch all error handling
 server.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     message: err.message,
   });
 });
+
 server.get("/", (req, res) => {
   res.send("<h2>API UP AND RUNNING</h2>");
 });

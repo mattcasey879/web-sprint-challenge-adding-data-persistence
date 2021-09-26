@@ -1,11 +1,13 @@
 // build your `Project` model here
 const db = require("../../data/dbConfig");
-const { mapObjects, intToBoolean } = require("./project-helpers");
+const { intToBoolean } = require("../helpers/api-helpers");
 
 async function getAll() {
-  const data = await db("projects");
-  const result = mapObjects(data);
-  return result;
+  const projects = await db("projects");
+  return projects.map((data) => ({
+    ...data,
+    project_completed: intToBoolean(data.project_completed),
+  }));
 }
 
 async function getById(id) {

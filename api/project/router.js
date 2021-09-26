@@ -6,12 +6,12 @@ const { validateProjectName } = require("./project-middleware")
 router.get("/", async (req, res, next) => {
 
     const data = await Project.getAll()
-    res.json(data)
+    res.status(200).json(data)
 })
 
 router.post("/", validateProjectName, async (req, res, next) => {
     const data = await Project.insert(req.body)
-    res.json(data)
+    res.status(200).json(data)
 })
 
 router.get("/:id", async (req,res, next) => {
